@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Networking Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-gray: #ecf0f1;
+            --dark-gray: #34495e;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: #f8f9fa;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 3rem 0;
+        }
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(52, 152, 219, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop') center/cover;
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.6s ease;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+        }
+        .about-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            line-height: 1.8;
+        }
+        .about-section p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        thead {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        th {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        tbody tr {
+            transition: var(--transition);
+        }
+        tbody tr:hover {
+            background-color: #f0f7ff;
+            transform: scale(1.01);
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+        .feature-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .feature-card p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+        }
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid var(--secondary-color);
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+        .social-links {
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: var(--secondary-color);
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 1rem; }
+            nav a { margin-left: 1rem; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 3rem 1rem; }
+            .section-title { font-size: 1.8rem; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🌟 Alumni Networking Portal</div>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact" onclick="contactClick(event)">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <h1>Alumni Networking Portal</h1>
+            <p>Alumni community and mentorship platform</p>
+        </section>
+        <section id="about" class="about-section">
+            <h2 class="section-title">📋 About Us</h2>
+            <p>Connect with alumni, mentors, and build lasting professional relationships. Our platform facilitates networking, mentorship, and career growth opportunities.</p>
+            <p>We are committed to delivering excellence in everything we do. Our team of professionals works tirelessly to ensure customer satisfaction and quality service delivery.</p>
+        </section>
+        
+<section>
+<h2 class="section-title">📊 Notable Alumni</h2>
+<table>
+<thead><tr><th>Profile</th><th>Graduation Year</th><th>Company</th><th>Location</th><th>Connections</th></tr></thead>
+<tbody>
+<tr><td>John Doe</td><td>2015</td><td>Google</td><td>San Francisco</td><td>320</td></tr>
+<tr><td>Jane Smith</td><td>2018</td><td>Microsoft</td><td>Seattle</td><td>245</td></tr>
+<tr><td>Mike Johnson</td><td>2016</td><td>Amazon</td><td>New York</td><td>280</td></tr>
+<tr><td>Sarah Chen</td><td>2019</td><td>Apple</td><td>Cupertino</td><td>195</td></tr>
+</tbody></table>
+</section>
+        <section id="services" class="features-grid">
+            <div class="feature-card">
+                <h3>✅ Quality</h3>
+                <p>Premium services tailored to your needs</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 Reliability</h3>
+                <p>Trusted by thousands of satisfied customers</p>
+            </div>
+            <div class="feature-card">
+                <h3>🚀 Innovation</h3>
+                <p>Cutting-edge solutions for modern challenges</p>
+            </div>
+        </section>
+        <section class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Join hundreds of happy customers today!</p>
+            <button class="cta-button" onclick="joinClick()">Join Now</button>
+            <button class="cta-button" onclick="learnMore()">Learn More</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Alumni Networking Portal. All rights reserved.</p>
+        <p>📧 Contact: info@alumni-networking-portal.com | 🌐 www.alumni-networking-portal.com</p>
+        <div class="social-links">
+            <a href="#" onclick="return false;">Facebook</a>
+            <a href="#" onclick="return false;">Twitter</a>
+            <a href="#" onclick="return false;">LinkedIn</a>
+            <a href="#" onclick="return false;">Instagram</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Built with ❤️ using HTML, CSS & JavaScript</p>
+    </footer>
+    <script>
+        function joinClick() {
+            alert('Thank you for your interest! We'll be in touch soon. 🎉');
+            console.log('Join button clicked at: ' + new Date().toLocaleString());
+        }
+        function learnMore() {
+            alert('Learn more about our services and offerings. Contact us for details!');
+        }
+        function contactClick(event) {
+            event.preventDefault();
+            alert('Contact us at: info@alumni-networking-portal.com\n\nWe typically respond within 24 hours.');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.addEventListener('click', function() {
+                    rows.forEach(r => r.style.backgroundColor = '');
+                    this.style.backgroundColor = '#e3f2fd';
+                    console.log('Row ' + (index + 1) + ' selected');
+                });
+            });
+        });
+        window.addEventListener('load', function() {
+            console.log('Page loaded: Alumni Networking Portal');
+        });
+    </script>
+</body>
+</html>
